@@ -4,9 +4,9 @@ import * as actions from './actions'
 import * as mutations from './mutations'
 
 const store = createStore({
-    state,
-    actions,
-    mutations
+  state,
+  actions,
+  mutations,
 })
 
 export default store

@@ -1,7 +1,24 @@
-# Vue 3 + Vite
+# Meal Search
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A recipe search app built with Vue 3. Search meals by name, first letter, or ingredient, browse random meals, and view full meal details (image, instructions, and ingredients). Meal data comes from [TheMealDB API](https://www.themealdb.com/api.php).
 
-## Recommended IDE Setup
+Live site: https://sleepyhands2.github.io/meal-search/
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+## Tech Stack
+
+- Vue 3 (`<script setup>` SFCs)
+- Vite
+- Vuex
+- Vue Router
+- Tailwind CSS
+- Axios
+
+## Development
+
+```sh
+npm install
+npm run dev      # start the dev server
+npm run build    # build for production
+npm run lint     # lint (with autofix)
+npm run format   # format with Prettier
+```
