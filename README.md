@@ -1,6 +1,6 @@
-# Meal Search
+# Forkful
 
-A recipe search app built with Vue 3. Search meals by name, first letter, or ingredient, browse random meals, and view full meal details (image, instructions, and ingredients). Meal data comes from [TheMealDB API](https://www.themealdb.com/api.php).
+Forkful is a recipe search app built with Vue 3. Search meals by name, first letter, or ingredient, browse random meals, and view full meal details (image, instructions, and ingredients). Meal data comes from [TheMealDB API](https://www.themealdb.com/api.php).
 
 Live site: https://sleepyhands2.github.io/meal-search/
 

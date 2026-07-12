@@ -25,7 +25,7 @@ onMounted(() => {
 })
 </script>
 <template>
-  <div class="p-8 pb-0 text-orange-500">
+  <div class="pt-8 text-brand-600">
     <h1 class="mb-4 text-4xl font-bold">Search Meals By Name</h1>
   </div>
 
