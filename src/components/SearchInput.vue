@@ -8,6 +8,10 @@ defineProps({
     type: String,
     default: 'Search…',
   },
+  label: {
+    type: String,
+    default: 'Search',
+  },
 })
 
 const emit = defineEmits(['update:modelValue', 'enter'])
@@ -32,6 +36,7 @@ const emit = defineEmits(['update:modelValue', 'enter'])
       :value="modelValue"
       type="text"
       :placeholder="placeholder"
+      :aria-label="label"
       class="w-full rounded-full border-cream-200 bg-white py-3 pl-11 pr-4 text-ink shadow-sm transition placeholder:text-ink/40 focus:border-brand-400 focus:ring-2 focus:ring-brand-500/40"
       @input="emit('update:modelValue', $event.target.value)"
       @keyup.enter="emit('enter')"

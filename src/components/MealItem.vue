@@ -15,13 +15,13 @@ defineProps({
     <div class="overflow-hidden">
       <img
         :src="meal.strMealThumb"
-        :alt="meal.strMeal"
+        alt=""
         loading="lazy"
         class="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
       />
     </div>
     <div class="p-5">
-      <h3 class="font-display text-lg font-bold text-ink transition-colors group-hover:text-brand-600">
+      <h3 class="font-display text-lg font-bold text-ink transition-colors group-hover:text-brand-700">
         {{ meal.strMeal }}
       </h3>
       <p v-if="meal.strInstructions" class="mt-2 text-sm text-ink/70 line-clamp-3">{{ meal.strInstructions }}</p>

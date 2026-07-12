@@ -4,6 +4,7 @@ import useAPI from '@/composables/useAPI'
 import SearchInput from '@/components/SearchInput.vue'
 import EmptyState from '@/components/EmptyState.vue'
 import ErrorState from '@/components/ErrorState.vue'
+import PageHeader from '@/components/PageHeader.vue'
 
 const { api } = useAPI()
 
@@ -34,23 +35,24 @@ const searchIngredients = computed(() => {
 })
 </script>
 <template>
-  <div class="pt-8 text-brand-600">
-    <h1 class="mb-4 text-4xl font-bold">Search Meals By Ingredients</h1>
-  </div>
+  <PageHeader title="Ingredients" description="Browse ingredients and discover meals that use them." />
 
-  <div class="py-4">
-    <SearchInput v-model="keyword" placeholder="Filter ingredients…" />
+  <div class="py-6">
+    <SearchInput v-model="keyword" placeholder="Filter ingredients…" label="Filter ingredients" />
 
     <ErrorState v-if="hasError" message="Something went wrong loading ingredients." @retry="loadIngredients" />
 
-    <div v-else-if="isLoading" class="grid gap-4 py-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <div v-else-if="isLoading" class="grid grid-cols-2 gap-4 py-8 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5">
       <div v-for="n in 8" :key="n" class="animate-pulse rounded-2xl border border-cream-200 bg-white p-4 shadow-sm">
         <div class="mx-auto h-24 w-24 rounded-full bg-cream-100"></div>
         <div class="mx-auto mt-3 h-4 w-2/3 rounded bg-cream-100"></div>
       </div>
     </div>
 
-    <div v-else-if="searchIngredients.length" class="grid gap-4 py-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <div
+      v-else-if="searchIngredients.length"
+      class="grid grid-cols-2 gap-4 py-8 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5"
+    >
       <router-link
         v-for="ingredient in searchIngredients"
         :key="ingredient.idIngredient"
@@ -61,11 +63,11 @@ const searchIngredients = computed(() => {
           :src="`https://www.themealdb.com/images/ingredients/${encodeURIComponent(
             ingredient.strIngredient,
           )}-small.png`"
-          :alt="ingredient.strIngredient"
+          alt=""
           loading="lazy"
           class="h-24 w-24 object-contain"
         />
-        <h3 class="mt-2 font-display text-lg font-bold text-ink transition-colors group-hover:text-brand-600">
+        <h3 class="mt-2 font-display text-lg font-bold text-ink transition-colors group-hover:text-brand-700">
           {{ ingredient.strIngredient }}
         </h3>
       </router-link>

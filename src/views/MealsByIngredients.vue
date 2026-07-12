@@ -5,6 +5,7 @@ import store from '../store'
 import MealList from '../components/MealList.vue'
 import EmptyState from '../components/EmptyState.vue'
 import ErrorState from '../components/ErrorState.vue'
+import PageHeader from '../components/PageHeader.vue'
 
 const meals = computed(() => store.state.mealsByIngredient)
 
@@ -32,9 +33,10 @@ async function loadMeals() {
 onMounted(loadMeals)
 </script>
 <template>
-  <div class="pt-8 text-brand-600">
-    <h1 class="mb-4 text-4xl font-bold">Meals for {{ route.params.ingredient }}</h1>
-  </div>
+  <PageHeader
+    :title="route.params.ingredient ? `Meals with ${route.params.ingredient}` : 'Meals by ingredient'"
+    description="Every recipe in the collection that uses this ingredient."
+  />
 
   <ErrorState v-if="hasError" @retry="loadMeals" />
   <MealList v-else-if="isLoading || meals.length" :meals="meals" :loading="isLoading"></MealList>

@@ -6,6 +6,7 @@ import MealList from '../components/MealList.vue'
 import SearchInput from '../components/SearchInput.vue'
 import EmptyState from '../components/EmptyState.vue'
 import ErrorState from '../components/ErrorState.vue'
+import PageHeader from '../components/PageHeader.vue'
 
 const route = useRoute()
 const keyword = ref('')
@@ -58,12 +59,15 @@ onMounted(() => {
 onUnmounted(() => clearTimeout(debounceTimer))
 </script>
 <template>
-  <div class="pt-8 text-brand-600">
-    <h1 class="mb-4 text-4xl font-bold">Search Meals By Name</h1>
-  </div>
+  <PageHeader title="Search meals" description="Find recipes by name — start typing and we'll do the rest." />
 
-  <div class="py-4">
-    <SearchInput v-model="keyword" placeholder="Search meals by name…" @enter="searchMeals" />
+  <div class="py-6">
+    <SearchInput
+      v-model="keyword"
+      placeholder="Search meals by name…"
+      label="Search meals by name"
+      @enter="searchMeals"
+    />
   </div>
 
   <ErrorState v-if="hasError" @retry="searchMeals" />

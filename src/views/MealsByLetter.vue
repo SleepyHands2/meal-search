@@ -5,6 +5,7 @@ import { useRoute } from 'vue-router'
 import MealList from '../components/MealList.vue'
 import EmptyState from '../components/EmptyState.vue'
 import ErrorState from '../components/ErrorState.vue'
+import PageHeader from '../components/PageHeader.vue'
 
 const route = useRoute()
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
@@ -33,11 +34,9 @@ async function loadMeals() {
 watch(() => route.params.letter, loadMeals, { immediate: true })
 </script>
 <template>
-  <div class="pt-8 text-brand-600">
-    <h1 class="mb-4 text-4xl font-bold">Search Meals By Letter</h1>
-  </div>
+  <PageHeader title="Browse by letter" description="Pick a letter to explore meals from A to Z." />
 
-  <div class="mt-2 flex flex-wrap justify-center gap-2">
+  <div class="mt-6 flex flex-wrap justify-center gap-2">
     <router-link
       v-for="letter in letters"
       :key="letter"
@@ -46,7 +45,7 @@ watch(() => route.params.letter, loadMeals, { immediate: true })
       :class="
         letter === route.params.letter
           ? 'border-brand-500 bg-brand-500 text-white shadow-sm'
-          : 'border-cream-200 bg-cream-100 text-brand-600 hover:border-brand-500 hover:bg-brand-500 hover:text-white'
+          : 'border-cream-200 bg-cream-100 text-brand-700 hover:border-brand-500 hover:bg-brand-500 hover:text-white'
       "
     >
       {{ letter }}

@@ -23,7 +23,10 @@ const links = [
 <template>
   <header class="sticky top-0 z-50 border-b border-cream-200 bg-cream-50/90 backdrop-blur">
     <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-      <RouterLink :to="{ name: 'Home' }" class="flex items-center gap-2 font-display text-2xl font-bold text-ink">
+      <RouterLink
+        :to="{ name: 'Home' }"
+        class="flex items-center gap-2 rounded-lg font-display text-2xl font-bold text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-cream-50"
+      >
         <svg
           class="h-6 w-6 text-brand-500"
           viewBox="0 0 24 24"
@@ -47,7 +50,7 @@ const links = [
           v-for="link in links"
           :key="link.name"
           :to="{ name: link.name }"
-          class="rounded-full px-4 py-2 font-medium text-ink/70 transition-colors hover:bg-brand-50 hover:text-brand-700"
+          class="rounded-full px-4 py-2 font-medium text-ink/70 transition-colors hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-cream-50"
         >
           {{ link.label }}
         </RouterLink>
@@ -56,8 +59,9 @@ const links = [
       <!-- Mobile hamburger -->
       <button
         type="button"
-        class="rounded-lg p-2 text-ink/80 transition-colors hover:bg-brand-50 hover:text-brand-700 md:hidden"
+        class="rounded-lg p-2 text-ink/80 transition-colors hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-cream-50 md:hidden"
         aria-label="Toggle navigation menu"
+        aria-controls="mobile-menu"
         :aria-expanded="menuOpen"
         @click="menuOpen = !menuOpen"
       >
@@ -81,12 +85,12 @@ const links = [
     </div>
 
     <!-- Mobile menu -->
-    <nav v-if="menuOpen" class="border-t border-cream-200 px-4 pb-4 pt-2 md:hidden" aria-label="Main">
+    <nav v-if="menuOpen" id="mobile-menu" class="border-t border-cream-200 px-4 pb-4 pt-2 md:hidden" aria-label="Main">
       <RouterLink
         v-for="link in links"
         :key="link.name"
         :to="{ name: link.name }"
-        class="block rounded-lg px-3 py-2 font-medium text-ink/70 transition-colors hover:bg-brand-50 hover:text-brand-700"
+        class="block rounded-lg px-3 py-2 font-medium text-ink/70 transition-colors hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-cream-50"
       >
         {{ link.label }}
       </RouterLink>

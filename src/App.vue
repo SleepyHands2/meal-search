@@ -4,9 +4,16 @@ import NavMenu from '@/components/NavMenu.vue'
 
 <template>
   <div class="flex min-h-screen flex-col">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-brand-500 focus:px-6 focus:py-3 focus:font-bold focus:text-white focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-700 focus:ring-offset-2 focus:ring-offset-cream-50"
+    >
+      Skip to content
+    </a>
+
     <NavMenu />
 
-    <main class="mx-auto w-full max-w-6xl flex-1 px-4 sm:px-6">
+    <main id="main-content" tabindex="-1" class="mx-auto w-full max-w-6xl flex-1 px-4 outline-none sm:px-6">
       <RouterView />
     </main>
 
@@ -22,26 +29,32 @@ import NavMenu from '@/components/NavMenu.vue'
         <nav aria-label="Footer">
           <ul class="space-y-1 text-sm">
             <li>
-              <RouterLink :to="{ name: 'Home' }" class="text-ink/70 transition-colors hover:text-brand-700">
+              <RouterLink
+                :to="{ name: 'Home' }"
+                class="rounded-sm text-ink/70 transition-colors hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-cream-100"
+              >
                 Home
               </RouterLink>
             </li>
             <li>
-              <RouterLink :to="{ name: 'Ingredients' }" class="text-ink/70 transition-colors hover:text-brand-700">
+              <RouterLink
+                :to="{ name: 'Ingredients' }"
+                class="rounded-sm text-ink/70 transition-colors hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-cream-100"
+              >
                 Ingredients
               </RouterLink>
             </li>
           </ul>
         </nav>
 
-        <div class="text-sm text-ink/60">
+        <div class="text-sm text-ink/70">
           <p>
             Recipe data from
             <a
               href="https://www.themealdb.com/"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-brand-700 underline underline-offset-2 transition-colors hover:text-brand-800"
+              class="rounded-sm text-brand-700 underline underline-offset-2 transition-colors hover:text-brand-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-cream-100"
             >
               TheMealDB
             </a>
