@@ -1,43 +1,75 @@
 <script setup>
-import { onMounted, computed, ref } from 'vue'
+import { onMounted, onUnmounted, computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import store from '../store'
 import MealList from '../components/MealList.vue'
+import SearchInput from '../components/SearchInput.vue'
+import EmptyState from '../components/EmptyState.vue'
+import ErrorState from '../components/ErrorState.vue'
 
 const route = useRoute()
 const keyword = ref('')
 const meals = computed(() => store.state.searchedMeals)
 
-function searchMeals() {
-  if (keyword.value) {
-    store.dispatch('searchMeals', keyword.value)
-  } else {
+const isLoading = ref(false)
+const hasError = ref(false)
+const searchedTerm = ref('')
+let debounceTimer = null
+
+async function searchMeals() {
+  clearTimeout(debounceTimer)
+  const term = keyword.value.trim()
+
+  if (!term) {
     store.commit('setSearchedMeals', [])
+    searchedTerm.value = ''
+    hasError.value = false
+    isLoading.value = false
+    return
+  }
+
+  if (term === searchedTerm.value && !hasError.value) return
+
+  isLoading.value = true
+  hasError.value = false
+  try {
+    await store.dispatch('searchMeals', term)
+    searchedTerm.value = term
+  } catch {
+    hasError.value = true
+  } finally {
+    isLoading.value = false
   }
 }
 
+watch(keyword, () => {
+  clearTimeout(debounceTimer)
+  debounceTimer = setTimeout(searchMeals, 400)
+})
+
 onMounted(() => {
-  keyword.value = route.params.name
+  keyword.value = route.params.name || ''
 
   if (keyword.value) {
     searchMeals()
   }
 })
+
+onUnmounted(() => clearTimeout(debounceTimer))
 </script>
 <template>
   <div class="pt-8 text-brand-600">
     <h1 class="mb-4 text-4xl font-bold">Search Meals By Name</h1>
   </div>
 
-  <div class="p-8">
-    <input
-      v-model="keyword"
-      type="text"
-      class="w-full rounded border-2 border-gray-400 bg-white"
-      placeholder="Enter Name"
-      @change="searchMeals"
-    />
+  <div class="py-4">
+    <SearchInput v-model="keyword" placeholder="Search meals by name…" @enter="searchMeals" />
   </div>
 
-  <MealList :meals="meals"></MealList>
+  <ErrorState v-if="hasError" @retry="searchMeals" />
+  <MealList v-else-if="isLoading || meals.length" :meals="meals" :loading="isLoading"></MealList>
+  <EmptyState
+    v-else-if="searchedTerm"
+    :message="`No meals found for “${searchedTerm}”. Try another search.`"
+  ></EmptyState>
 </template>
